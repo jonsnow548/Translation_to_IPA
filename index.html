@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPA Transcription Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 700px;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+        .result, .error {
+            background-color: #e9ecef;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IPA Transcription Tool</h1>
+
+        <!-- Learn About IPA Button -->
+        <div class="text-center mb-4">
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#learnIPA">
+                Learn About IPA
+            </button>
+        </div>
+
+        <!-- Modal for Learn About IPA -->
+        <div class="modal fade" id="learnIPA" tabindex="-1" aria-labelledby="learnIPALabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="learnIPALabel">What is IPA?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Introduction to IPA</h6>
+                        <p>
+                            The International Phonetic Alphabet (IPA) is a standardized system for representing
+                            the sounds of spoken language. It is used by linguists, speech therapists, and
+                            language enthusiasts to describe pronunciation accurately across different languages.
+                        </p>
+                        <h6>How It Works</h6>
+                        <p>
+                            Each IPA symbol corresponds to a unique sound. Here are some common symbols and their pronunciations:
+                        </p>
+                        <div class="ipa-guide">
+                            <p><span class="ipa-symbol">[p]</span> - as in <strong>pen</strong><br>
+                            <em>How to pronounce:</em> A voiceless sound produced by briefly stopping the airflow with the lips and then releasing it. It’s the “p” sound in words like *pen* and *pat*.</p>
+
+                            <p><span class="ipa-symbol">[b]</span> - as in <strong>bat</strong><br>
+                            <em>How to pronounce:</em> A voiced sound, similar to [p], but the vocal cords vibrate when producing it. It’s the “b” sound in words like *bat* and *big*.</p>
+
+                            <p><span class="ipa-symbol">[θ]</span> - as in <strong>think</strong><br>
+                            <em>How to pronounce:</em> A voiceless sound produced by gently touching the tip of the tongue to the upper teeth. It’s the "th" sound in *think* or *bath*.</p>
+
+                            <p><span class="ipa-symbol">[ð]</span> - as in <strong>this</strong><br>
+                            <em>How to pronounce:</em> A voiced sound, also produced by touching the tongue to the upper teeth, but with vocal cord vibration. It’s the "th" sound in *this* or *brother*.</p>
+
+                            <p><span class="ipa-symbol">[f]</span> - as in <strong>fish</strong><br>
+                            <em>How to pronounce:</em> A voiceless sound produced by forcing air between the upper teeth and lower lip. It’s the "f" sound in *fish* or *fine*.</p>
+
+                            <p><span class="ipa-symbol">[v]</span> - as in <strong>van</strong><br>
+                            <em>How to pronounce:</em> A voiced version of [f], produced the same way, but with vocal cord vibration. It’s the "v" sound in *van* or *voice*.</p>
+
+                            <p><span class="ipa-symbol">[s]</span> - as in <strong>sun</strong><br>
+                            <em>How to pronounce:</em> A voiceless sound produced by forcing air through the narrow gap between the tongue and the roof of the mouth (alveolar ridge). It’s the "s" sound in *sun* and *see*.</p>
+
+                            <p><span class="ipa-symbol">[z]</span> - as in <strong>zebra</strong><br>
+                            <em>How to pronounce:</em> A voiced sound produced in the same way as [s], but with vocal cord vibration. It’s the "z" sound in *zebra* and *zip*.</p>
+
+                            <p><span class="ipa-symbol">[ʃ]</span> - as in <strong>shoe</strong><br>
+                            <em>How to pronounce:</em> A voiceless sound produced by pressing the tongue against the roof of the mouth and rounding the lips. It’s the "sh" sound in *shoe* or *she*.</p>
+
+                            <p><span class="ipa-symbol">[ʒ]</span> - as in <strong>measure</strong><br>
+                            <em>How to pronounce:</em> A voiced version of [ʃ], with vocal cord vibration. It’s the "s" sound in *measure* or *vision*.</p>
+
+                            <p><span class="ipa-symbol">[tʃ]</span> - as in <strong>chocolate</strong><br>
+                            <em>How to pronounce:</em> A combination of [t] and [ʃ], used to represent the "ch" sound in words like *chocolate* and *church*.</p>
+
+                            <p><span class="ipa-symbol">[dʒ]</span> - as in <strong>judge</strong><br>
+                            <em>How to pronounce:</em> A combination of [d] and [ʒ], used to represent the "j" sound in words like *judge* and *jam*.</p>
+
+                            <p><span class="ipa-symbol">[k]</span> - as in <strong>cat</strong><br>
+                            <em>How to pronounce:</em> A voiceless sound produced by blocking the airflow with the back of the tongue against the velum (soft part of the roof of the mouth). It’s the "k" sound in *cat* or *king*.</p>
+
+                            <p><span class="ipa-symbol">[g]</span> - as in <strong>go</strong><br>
+                            <em>How to pronounce:</em> A voiced version of [k], produced in the same way but with vocal cord vibration. It’s the "g" sound in *go* or *give*.</p>
+
+                            <p><span class="ipa-symbol">[i]</span> - as in <strong>see</strong><br>
+                            <em>How to pronounce:</em> A high, front vowel sound made with the tongue positioned close to the roof of the mouth, but not touching it. It’s the "ee" sound in *see* or *bee*.</p>
+
+                            <p><span class="ipa-symbol">[ɪ]</span> - as in <strong>sit</strong><br>
+                            <em>How to pronounce:</em> A short, high, front vowel sound. The tongue is still close to the roof of the mouth, but it’s slightly lower than [i]. It’s the "i" sound in *sit* or *bit*.</p>
+
+                            <p><span class="ipa-symbol">[ɑ]</span> - as in <strong>father</strong><br>
+                            <em>How to pronounce:</em> A low, back vowel sound. The tongue is placed towards the back of the mouth, with the jaw open. It’s the "a" sound in *father* or *car*.</p>
+
+                            <p><span class="ipa-symbol">[ɔ]</span> - as in <strong>thought</strong> (depending on the accent, such as British RP or some American regional accents)<br>
+                                <em>How to pronounce:</em> A mid-low, back, rounded vowel. It sounds like the “aw” in words like <strong>thought</strong>, <strong>caught</strong>, or <strong>law</strong> in some accents.</p>
+
+                            <p><span class="ipa-symbol">[u]</span> - as in <strong>too</strong><br>
+                            <em>How to pronounce:</em> A high, back vowel sound. The tongue is positioned near the roof of the mouth, towards the back, and the lips are rounded. It’s the "oo" sound in *too* or *food*.</p>
+                        </div>
+
+                        <h6>Why Learn IPA?</h6>
+                        <p>
+                            Understanding IPA symbols helps with:
+                            <ul>
+                                <li>Accurate pronunciation of foreign languages.</li>
+                                <li>Understanding regional accents and variations.</li>
+                                <li>Better reading of dictionaries that use IPA for phonetic transcriptions.</li>
+                            </ul>
+                        </p>
+
+                        <p>
+                            The IPA is organized into categories such as consonants, vowels, and suprasegmentals
+                            (like stress and intonation).
+                        </p>
+                        <h6>Why Use IPA?</h6>
+                        <p>
+                            IPA is valuable for:
+                            <ul>
+                                <li>Learning accurate pronunciation of foreign languages.</li>
+                                <li>Understanding regional accents and variations.</li>
+                                <li>Documenting endangered languages.</li>
+                            </ul>
+                        </p>
+                        <h6>Learn More</h6>
+                        <p>
+                            For more details, visit the <a href="https://www.internationalphoneticalphabet.org/" target="_blank">IPA Official Website</a>.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Word Form -->
+        <form method="POST" action="/" class="mb-4">
+            <div class="mb-3">
+                <label for="word" class="form-label">Enter a word in English:</label>
+                <input type="text" class="form-control" id="word" name="word" required>
+            </div>
+            <button type="submit" name="single_word" class="btn btn-primary w-100">Get IPA Transcription</button>
+        </form>
+
+        <!-- File Upload Form -->
+        <form method="POST" action="/" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="file" class="form-label">Upload a .txt file (one word per line):</label>
+                <input type="file" class="form-control" id="file" name="file" accept=".txt" required>
+            </div>
+            <button type="submit" name="file_upload" class="btn btn-secondary w-100">Process File</button>
+        </form>
+
+        <!-- Single Word Result -->
+        {% if single_result %}
+        <div class="result">
+            <p><strong>Word:</strong> {{ single_result[0] }}</p>
+            <p><strong>IPA Transcription:</strong> {{ single_result[1] }}</p>
+        </div>
+        {% endif %}
+
+        <!-- File Results -->
+        {% if file_results %}
+        <div class="result">
+            <h5>File Transcriptions:</h5>
+            <ul>
+                {% for word, transcription in file_results %}
+                <li><strong>{{ word }}:</strong> {{ transcription }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <!-- Error Message -->
+        {% if error %}
+        <div class="alert alert-danger error" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
